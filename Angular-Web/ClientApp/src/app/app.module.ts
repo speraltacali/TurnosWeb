@@ -9,7 +9,9 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { EmpresaComponent } from './empresa/empresa.component';
+//import { EmpresaComponent } from './empresa/empresa.component';
+//import { EmpresaServicio } from './empresa/EmpresaServicio';
+import { PersonaComponent } from './persona/persona.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { EmpresaComponent } from './empresa/empresa.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    EmpresaComponent
+    //EmpresaComponent,
+    PersonaComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,10 +31,13 @@ import { EmpresaComponent } from './empresa/empresa.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'empresa', component: EmpresaComponent }
+        //{ path: 'empresa', component: EmpresaComponent },
+        { path: 'persona', component: PersonaComponent }
     ])
   ],
-  providers: [],
+    providers: [
+        //EmpresaServicio
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

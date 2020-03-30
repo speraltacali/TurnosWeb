@@ -32,6 +32,15 @@ namespace Angular_Web
 
             var connection = @"./DESKTOP-NK0OJF1;DataBase=TurnosWeb;Trusted_Connection=true;ConnectRetryCount=0";
             services.AddDbContext<Context>(options => options.UseSqlServer(AccesoCadenaConexion));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

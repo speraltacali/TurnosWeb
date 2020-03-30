@@ -15,6 +15,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0-beta3.final">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -36,7 +40,8 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\empresa\empresa.component.ts" />
-    <None Remove="ClientApp\src\app\empresa\empresa.model.ts" />
+    <None Remove="ClientApp\src\app\empresa\EmpresaServicio.ts" />
+    <None Remove="ClientApp\src\app\persona\persona.component.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,7 +53,8 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\empresa\empresa.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\empresa\empresa.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\empresa\EmpresaServicio.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\persona\persona.component.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

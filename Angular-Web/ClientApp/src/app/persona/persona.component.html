@@ -1,0 +1,20 @@
+<h1 id="tableLabel">Lista de Personas</h1>
+
+<p *ngIf="!personas"><em>Loading...</em></p>
+
+<table class='table table-striped'  *ngIf="personas">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let persona of personas">
+      <td>{{ persona.Id }}</td>
+      <td>{{ persona.Nombre }}</td>
+      <td>{{ persona.Apellido }}</td>
+    </tr>
+  </tbody>
+</table>
