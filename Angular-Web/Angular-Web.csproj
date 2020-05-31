@@ -39,8 +39,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\categorias\categoria\categoria.component.ts" />
+    <None Remove="ClientApp\src\app\categorias\servicio-model\categoria.model.ts" />
+    <None Remove="ClientApp\src\app\categorias\servicio-model\categoria.service.ts" />
+    <None Remove="ClientApp\src\app\empresa\empresa-form\empresa-form.component.ts" />
     <None Remove="ClientApp\src\app\empresa\empresa.component.ts" />
-    <None Remove="ClientApp\src\app\empresa\EmpresaServicio.ts" />
+    <None Remove="ClientApp\src\app\empresa\empresa.model.ts" />
+    <None Remove="ClientApp\src\app\empresa\empresa.service.ts" />
     <None Remove="ClientApp\src\app\persona\persona.component.ts" />
   </ItemGroup>
 
@@ -52,9 +57,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\categorias\categoria\categoria.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\categorias\servicio-model\categoria.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\categorias\servicio-model\categoria.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\empresa\empresa-form\empresa-form.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\empresa\empresa.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\empresa\EmpresaServicio.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\empresa\empresa.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\empresa\empresa.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\persona\persona.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\categorias\categoria-items\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

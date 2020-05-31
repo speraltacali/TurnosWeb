@@ -40,7 +40,6 @@ namespace TW.Servicio.Empresa
             entity.Eliminado = dto.Eliminado;
 
             _empresaRepositorio.Modificar(entity);
-            Guardar();
 
             return dto;
         }

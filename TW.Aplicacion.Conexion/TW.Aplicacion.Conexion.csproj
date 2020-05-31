@@ -12,4 +12,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TW.IServicio\TW.IServicio.csproj" />
+  </ItemGroup>
+
 </Project>

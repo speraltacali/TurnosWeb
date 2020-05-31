@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using TW.IServicio.Empresa;
 using TW.IServicio.Empresa.DTO;
 using TW.Servicio.Empresa;
@@ -14,70 +16,112 @@ namespace Angular_Web.Controllers
     [ApiController]
     public class EmpresaController : ControllerBase
     {
-        private readonly IEmpresaServicio _empresaServicio;
+        private readonly IEmpresaServicio _empresaServicio = new EmpresaServicio();
+        private readonly ILogger<EmpresaController> _logger;
 
-        public EmpresaController(EmpresaServicio empresaServicio)
+
+        public EmpresaController(ILogger<EmpresaController> logger)
         {
-            _empresaServicio = empresaServicio;
+            _logger = logger;
         }
 
-        [HttpGet("[action]")]
-        public IEnumerable<EmpresaDto> ObtenerTodo()
+        //api/Empresa
+        [HttpGet]
+        public IEnumerable<EmpresaDto> Get()
         {
             return _empresaServicio.ObtenerTodo();
         }
 
-        public class Persona
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetEmpresa([FromRoute] long id)
         {
-            public long Id { get; set; }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            public string Nombre { get; set; }
+            var Empresa = _empresaServicio.ObtenerPorId(id);
 
-            public string Apellido { get; set; }
+            if (Empresa == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(Empresa);
         }
 
-        [HttpGet("[action]")]
-        public IEnumerable<Persona> GetPersona()
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutEmpresa([FromRoute] long id,[FromBody] EmpresaDto empresaDto)
         {
-            List<Persona> personas = new List<Persona>();
-
-            var persona = new Persona()
+            if(!ModelState.IsValid)
             {
-                Id = 1,
-                Nombre = "Santiago",
-                Apellido = "Gonzalez"
-            };
+                return BadRequest(ModelState);
+            }
 
-            personas.Add(persona);
-
-            var persona1 = new Persona()
+            if(id != empresaDto.Id)
             {
-                Id = 2,
-                Nombre = "Juan",
-                Apellido = "Diaz"
-            };
+                return BadRequest();
+            }
 
-            personas.Add(persona1);
+            var empresa = _empresaServicio.Modificar(empresaDto);
 
-            var persona2 = new Persona()
+            try
             {
-                Id = 3,
-                Nombre = "Pepe",
-                Apellido = "Nemez"
-            };
-
-            personas.Add(persona2);
-
-            var persona3 = new Persona()
+                _empresaServicio.Guardar();
+                // Verificar linea , no aplica 
+                return Ok(empresa);
+            }
+            catch (DbUpdateConcurrencyException)
             {
-                Id = 4,
-                Nombre = "Jose",
-                Apellido = "Velez"
-            };
-
-            personas.Add(persona3);
-
-            return personas.ToList();
+                if(!EmpresaExiste(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] EmpresaDto empresaDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var empresa =_empresaServicio.Agregar(empresaDto);
+
+            return Ok(empresa);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteEmpresa([FromRoute] long id)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var empresa = _empresaServicio.ObtenerPorId(id);
+
+            if(empresa == null)
+            {
+                return NotFound();
+            }
+
+            _empresaServicio.Eliminar(id);
+
+            return Ok(empresa);
+        }
+
+        private bool EmpresaExiste(long id)
+        {
+            return _empresaServicio.ObtenerTodo().Any(x => x.Id == id);
+        }
+      
     }
 }

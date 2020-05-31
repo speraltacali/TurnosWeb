@@ -1,0 +1,82 @@
+<br />
+<br />
+<br />
+<h1>Agregar nueva Empresa</h1>
+<form class="form-horizontal" 
+      (ngSubmit)="guardar()" [formGroup]="formGroup" novalidate>
+  <fieldset>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': (formGroup.get('razonSocial').touched || formGroup.get('razonSocial').dirty) && !formGroup.get('razonSocial').valid }">
+      <label class="col-md-2 control-label"
+             for="razonSocialId">Razon Social</label>
+
+      <div class="col-md-8">
+        <input class="form-control" 
+               id="razonSocialId"  
+               type="text"
+               required
+               formControlName="razonSocial" />
+        <span class="help-block" *ngIf="(formGroup.get('razonSocial').touched || formGroup.get('razonSocial').dirty) && formGroup.get('razonSocial').errors">
+          <span *ngIf="formGroup.get('razonSocial').errors.required" style="color:red">
+            El campo razon Social es requerido
+          </span>
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': (formGroup.get('descripcion').touched || formGroup.get('descripcion').dirty) && !formGroup.get('descripcion').valid }">
+      <label class="col-md-2 control-label"
+             for="descripcionId">Descripcion</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="descripcionId"
+               type="text"
+               required
+               formControlName="descripcion" />
+        <span class="help-block" *ngIf="(formGroup.get('descripcion').touched || formGroup.get('descripcion').dirty) && formGroup.get('descripcion').errors">
+          <span *ngIf="formGroup.get('descripcion').errors.required" style="color:red">
+            El campo descripcion es requerido
+          </span>
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group"
+         [ngClass]="{'has-error': (formGroup.get('cuil').touched || formGroup.get('cuil').dirty) && !formGroup.get('cuil').valid }">
+      <label class="col-md-2 control-label"
+             for="cuilId">Cuil</label>
+
+      <div class="col-md-8">
+        <input class="form-control"
+               id="cuilId"
+               type="text"
+               required
+               formControlName="cuil" />
+        <span class="help-block" *ngIf="(formGroup.get('cuil').touched || formGroup.get('cuil').dirty) && formGroup.get('cuil').errors">
+          <span *ngIf="formGroup.get('cuil').errors.required" style="color:red">
+            El campo cuil es requerido
+          </span>
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-4 col-md-offset-2">
+        <span>
+          <button class="btn btn-primary" type="submit" [disabled]="!formGroup.valid">
+            Guardar
+          </button>
+
+          <button class="btn btn-danger" type="button" [routerLink]='["/empresa"]'>
+            Cancelar
+          </button>
+        </span>
+      </div>
+    </div>
+
+
+  </fieldset>
+</form>

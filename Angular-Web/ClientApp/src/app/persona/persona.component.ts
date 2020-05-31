@@ -11,7 +11,7 @@ export class PersonaComponent {
     public personas: Persona[];
       
     constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-        http.get<Persona[]>(baseUrl + 'api/Empresa/GetPersona').subscribe(result => {
+        http.get<Persona[]>(baseUrl + 'api/Persona').subscribe(result => {
             this.personas = result;
         }, error => console.error(error));
     }
